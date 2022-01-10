@@ -1,0 +1,21 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    yum:
+      update_cache: yes
+
+  - name: Shut down service httpd, in all cases
+    ansible.builtin.systemd:
+      name: httpd
+      state: stopped
+ 
+  - name: Uninstall apache2 package
+    yum:
+      name: httpd
+      state: absent
+ 
+  
